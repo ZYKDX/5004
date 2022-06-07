@@ -81,7 +81,7 @@ public class pinSystem
 
 		for(int i = 0; i < 10; i++)
 		{
-			randomNum = rand.nextInt(10);
+			randomNum = rand.nextInt(3) + 1;
 			table[i] = randomNum;
 		}
 		System.out.println("Please enter 5 digits according to your PIN and the following:");
