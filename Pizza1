@@ -1,0 +1,201 @@
+/**
+ * Stores information about a single pizza.
+ * Each pizza has size(String), number of cheese topping (int), number of pepperoni topping(int), and number of ham topping(int)
+ */
+public class Pizza {
+
+    private String size;
+    private int numCheese;
+    private int numPepperoni;
+    private int numHam;
+
+    /**
+     * Constructs a Pizza object and initialize it to:
+     * small size, 0 cheese topping, 0 pepperoni topping, and 0 ham topping
+     */
+    public Pizza(){
+        setPizza("small", 0, 0, 0);
+    }
+
+    public Pizza(Pizza otherPizza)
+    {
+        this.size = otherPizza.size;
+        this.numCheese = otherPizza.numCheese;
+        this.numPepperoni = otherPizza.numPepperoni;
+        this.numHam = otherPizza.numHam;
+    }
+
+    /**
+     * Construct a Pizza object and initialize it to the given size, numCheese, numPepperoni, numHam
+     * @param size the size of the pizza
+     * @param numCheese the number of cheese topping
+     * @param numPepperoni the number of pepperoni topping
+     * @param numHam the number of ham topping
+     */
+    public Pizza(String size, int numCheese, int numPepperoni, int numHam){
+        setPizza(size, numCheese, numPepperoni, numHam);
+    }
+
+    /**
+     * Set the size, numCheese, numPepperoni and numHam of the pizza to the given parameters
+     * @param size the size of the pizza
+     * @param numCheese the number of cheese topping of the pizza
+     * @param numPepperoni the number of pepperoni topping of the pizza
+     * @param numHam the number of ham topping of the pizza
+     */
+    private void setPizza(String size, int numCheese, int numPepperoni, int numHam){
+        if(isPizza(size, numCheese, numPepperoni, numHam)){
+            this.size = size;
+            this.numCheese = numCheese;
+            this.numPepperoni = numPepperoni;
+            this.numHam = numHam;
+        }
+        else{
+            System.out.println("Fatal Error");
+            System.exit(0);
+        }
+    }
+
+    /**
+     * Decide if the given parameter values are legal for a pizza
+     * @param size the size of the pizza
+     * @param numCheese the number of cheese toppings of the pizza
+     * @param numPepperoni the number of pepperoni topping of the pizza
+     * @param numHam the number of ham topping of the pizza
+     * @return if the given arguments are legal for a pizza, return true; else return false
+     */
+    private boolean isPizza(String size, int numCheese, int numPepperoni, int numHam){
+        if(!(size.equals("small")) && !(size.equals("medium")) && !(size.equals("large"))){
+            return false;
+        }
+        if(numCheese < 0 || numPepperoni < 0 || numHam < 0){
+            return false;
+        }
+        return true;
+    }
+
+    /**
+     * Get the size of the pizza
+     * @return the size of the pizza
+     */
+    public String getSize(){
+        return this.size;
+    }
+
+    /**
+     * Get the number of cheese topping of the pizza
+     * @return the number of cheese topping of the pizza
+     */
+    public int getCheese(){
+        return this.numCheese;
+    }
+
+    /**
+     * Get the number of pepperoni topping of the pizza
+     * @return the number of pepperoni topping of the pizza
+     */
+    public int getPepperoni(){
+        return this.numPepperoni;
+    }
+
+    /**
+     * Get the number of ham topping of the pizza
+     * @return the number of ham topping of the pizza
+     */
+    public int getHam(){
+        return this.numHam;
+    }
+
+    /**
+     * Set the size of the pizza (if the given size is valid for a pizza)
+     * @param size size of the pizza
+     */
+    public void setSize(String size){
+        if(size.equals("small") || size.equals("medium") || size.equals("large")){
+            this.size = size;
+        }
+        else{
+            System.out.println("Failed to set size: illegal value");
+        }
+    }
+
+    /**
+     * Set the number of cheese topping on a pizza
+     * @param numCheese the number of cheese topping
+     */
+    public void setCheese(int numCheese){
+        if(numCheese >= 0){
+            this.numCheese = numCheese;
+        }
+        else{
+            System.out.println("Failed to set number of cheese topping: illegal value");
+        }
+    }
+
+    /**
+     * Set the number of pepperoni topping on a pizza
+     * @param numPepperoni the number of pepperoni topping
+     */
+    public void setPepperoni(int numPepperoni){
+        if(numPepperoni >= 0){
+            this.numPepperoni = numPepperoni;
+        }
+        else{
+            System.out.println("Failed to set number of pepperoni topping: illegal value");
+        }
+    }
+
+    /**
+     * Set the number of ham topping on a pizza
+     * @param numHam the number of ham topping
+     */
+    public void setHam(int numHam){
+        if(numHam >= 0){
+            this.numHam = numHam;
+        }
+        else{
+            System.out.println("Failed to set number of ham topping: illegal value");
+        }
+    }
+
+    /**
+     * Calculate the cost of the pizza, cost = base cost + topping cost
+     * if size = small, base cost = 10; if size is medium, base cost = 12; if size = large, base cost = 14
+     * each topping costs 2 dollars so topping cost = 2 * (numCheese, numPepperoni, numHam)
+     * @return the calculated cost of the single pizza
+     */
+    public double calcCost(){
+        double baseCost = 10;
+        if(this.size.equals("medium")){
+            baseCost = 12;
+        }
+        if(this.size.equals("large")){
+            baseCost = 14;
+        }
+        return baseCost + 2 * (this.numHam + this.numCheese + this.numPepperoni);
+    }
+
+    /**
+     * Get a string which provides the information of the pizza object
+     * @return a string including the info of the pizza (including its size, numCheese, numPepperoni, numHam)
+     */
+    public String getDescription(){
+        return String.format("%s pizza with %d cheese topping(s), %d pepperoni topping(s) and %d ham topping(s). " +
+                "Total price: %.2f USD.\n", size, numCheese, numPepperoni, numHam, this.calcCost());
+    }
+
+    /**
+     * Main method which is used to do some manual test of the class.
+     * @param args
+     */
+    public static void main(String[] args){
+        Pizza pizza1 = new Pizza();
+        System.out.printf("default pizza1: \n" + pizza1.getDescription());
+        Pizza pizza2 = new Pizza("medium", 1,1,1);
+        System.out.printf("pizza2: \n" + pizza2.getDescription());
+        Pizza pizza3 = new Pizza("large", 2,3,4);
+        System.out.printf("pizza3: \n" + pizza3.getDescription());
+        pizza3.setCheese(pizza3.getCheese() + 1);
+        System.out.println("add 1 cheese to pizza 3: \n" + pizza3.getDescription());
+    }
+}
