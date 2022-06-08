@@ -1,3 +1,8 @@
+Pizza class: should have a copy constructor
+PizzaOrder1: independent copy in getPizza method
+
+
+
 Instructions:
 1.	This is a group assignment. Please form a group of 2 to 3 students and work on this assignment together.
 2.	Please include a summary of your group work. (10 points)
